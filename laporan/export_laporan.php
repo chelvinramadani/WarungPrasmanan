@@ -44,13 +44,14 @@ $data2 = $result2->fetch_assoc();
 
 // Query detail produk terjual
 $sql3 = "
-    SELECT pr.nama_produk, SUM(pd.jumlah) AS jumlah_terjual
+    SELECT pr.id_produk, pr.nama_produk, SUM(pd.jumlah) AS jumlah_terjual
     FROM pesanan_detail pd
     JOIN pesanan p ON pd.id_pesanan = p.id
-    JOIN produk pr ON pd.id_produk = pr.id
+    JOIN produk pr ON pd.id_produk = pr.id_produk
     WHERE $whereClause
-    GROUP BY pr.id
+    GROUP BY pr.id_produk
 ";
+
 $stmt3 = $koneksi->prepare($sql3);
 $stmt3->bind_param("s", $param);
 $stmt3->execute();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Jun 2025 pada 13.02
+-- Waktu pembuatan: 11 Jun 2025 pada 05.32
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -121,6 +121,25 @@ INSERT INTO `produk` (`id_produk`, `gambar`, `nama_produk`, `harga`, `id_kategor
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `role_limit`
+--
+
+CREATE TABLE `role_limit` (
+  `role` varchar(50) NOT NULL,
+  `max_jumlah` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `role_limit`
+--
+
+INSERT INTO `role_limit` (`role`, `max_jumlah`) VALUES
+('kasir', 4),
+('manajer', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `users`
 --
 
@@ -137,7 +156,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `nama_lengkap`) VALUES
-(2, 'admin', '$2y$10$99XDIri2fy1RBSQZ40ZbpO4HlGhUbx/mBA/TKeZeXtbcKzfOBEKdS', 'admin', 'Administrator');
+(2, 'admin', '$2y$10$99XDIri2fy1RBSQZ40ZbpO4HlGhUbx/mBA/TKeZeXtbcKzfOBEKdS', 'admin', 'Administrator'),
+(3, 'manajer_chelvin', '$2y$10$4GqgB5P5u5c6vJ601YxwOuqQQwKV3Hz40lGZrDZsXu2gFOeqGASWC', 'manajer', 'chelvin'),
+(5, 'kasir_beauty', '$2y$10$tfDRRg1GzWcwBBgGw0FUa.m1DBSocKH6MbPXUVMUQ1hk4v.KXs77m', 'kasir', 'Beauty'),
+(6, 'kasir_dinda', '$2y$10$/Vf0zyFshAGsAWUv4j0jOe8skRdIcUr6Ti5V58qSdRbFF.V8V1U6y', 'kasir', 'Dinda'),
+(7, 'manajer_Devinka', '$2y$10$j44VJFy.OeBVDNoXNmj0g.ZRiYtoEdpsBNDbCS2C3klWPwnTd2rOa', 'manajer', 'Devinka');
 
 --
 -- Indexes for dumped tables
@@ -169,6 +192,12 @@ ALTER TABLE `pesanan_detail`
 ALTER TABLE `produk`
   ADD PRIMARY KEY (`id_produk`),
   ADD KEY `id_kategori` (`id_kategori`);
+
+--
+-- Indeks untuk tabel `role_limit`
+--
+ALTER TABLE `role_limit`
+  ADD PRIMARY KEY (`role`);
 
 --
 -- Indeks untuk tabel `users`
@@ -209,7 +238,7 @@ ALTER TABLE `produk`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

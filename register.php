@@ -70,23 +70,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body class="bg-light">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="#"><i class="bi bi-egg-fried"></i> Prasmanan Rasa Ibu</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="#produk">Menu</a></li>
-          <li class="nav-item"><a class="nav-link" href="#tentang">Tentang</a></li>
-          <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
-          <li class="nav-item"><a class="btn btn-outline-light me-2" href="login.php">Login</a></li>
-          <li class="nav-item"><a class="btn btn-warning" href="register.php">Daftar</a></li>
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#"><i class="bi bi-egg-fried"></i> Prasmanan Rasa Ibu</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" a href="index.php">Menu</a></li>
+        <li class="nav-item"><a class="nav-link" a href="index.php">Tentang</a></li>
+        <li class="nav-item"><a class="btn btn-outline-light me-2" href="login.php">Login</a></li>
+        <li class="nav-item"><a class="btn btn-warning" href="register.php">Daftar</a></li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <div class="container mt-5">
     <div class="row justify-content-center">

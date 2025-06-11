@@ -21,7 +21,13 @@ $produk_result = $koneksi->query($sql_produk);
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <style>
-    body { font-family: 'Poppins', sans-serif; }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+    }
     .hero {
       background: url('assets/hero-prasmanan.jpg') no-repeat center center/cover;
       height: 100vh;
@@ -54,10 +60,19 @@ $produk_result = $koneksi->query($sql_produk);
       color: #fff;
       padding: 40px 0;
     }
-    .footer a { color: #ffc107; text-decoration: none; }
+    .footer a {
+      color: #ffc107;
+      text-decoration: none;
+    }
+    .navbar .nav-link.active {
+      font-weight: bold;
+      color:rgb(255, 255, 255) !important;
+    }
   </style>
 </head>
-<body>
+
+<!-- ScrollSpy setup -->
+<body data-bs-spy="scroll" data-bs-target="#navContent" data-bs-offset="80" tabindex="0">
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -70,22 +85,12 @@ $produk_result = $koneksi->query($sql_produk);
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link" href="#produk">Menu</a></li>
         <li class="nav-item"><a class="nav-link" href="#tentang">Tentang</a></li>
-        <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
         <li class="nav-item"><a class="btn btn-outline-light me-2" href="login.php">Login</a></li>
         <li class="nav-item"><a class="btn btn-warning" href="register.php">Daftar</a></li>
       </ul>
     </div>
   </div>
 </nav>
-
-<!-- Hero -->
-<section class="hero">
-  <div class="container hero-content">
-    <h1 class="display-4 fw-bold">Makan Sepuasnya di <span class="text-warning">Prasmanan Rasa Ibu</span></h1>
-    <p class="lead">Nikmati beragam menu lezat, tradisional, dan bergizi setiap hari!</p>
-    <a href="#produk" class="btn btn-warning btn-lg mt-3">Lihat Menu</a>
-  </div>
-</section>
 
 <!-- Kategori & Menu -->
 <section id="produk" class="py-5 bg-light">

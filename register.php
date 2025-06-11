@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors[] = "Semua kolom harus diisi.";
   }
 
+  // Cek username unik
   $cek = $koneksi->prepare("SELECT id FROM users WHERE username = ?");
   $cek->bind_param("s", $username);
   $cek->execute();
@@ -22,6 +23,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors[] = "Username sudah digunakan.";
   }
   $cek->close();
+
+  // Cek batas role
+  $queryRoleCount = $koneksi->prepare("SELECT COUNT(*) FROM users WHERE role = ?");
+  $queryRoleCount->bind_param("s", $role);
+  $queryRoleCount->execute();
+  $queryRoleCount->bind_result($jumlah_role_sekarang);
+  $queryRoleCount->fetch();
+  $queryRoleCount->close();
+
+  $queryRoleLimit = $koneksi->prepare("SELECT max_jumlah FROM role_limit WHERE role = ?");
+  $queryRoleLimit->bind_param("s", $role);
+  $queryRoleLimit->execute();
+  $queryRoleLimit->bind_result($batas_role);
+  if ($queryRoleLimit->fetch()) {
+    if ($jumlah_role_sekarang >= $batas_role) {
+      $errors[] = "Kuota untuk role '$role' sudah penuh.";
+    }
+  }
+  $queryRoleLimit->close();
 
   if (empty($errors)) {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -36,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
   }
 }
+
 ?>
 
 <!DOCTYPE html>

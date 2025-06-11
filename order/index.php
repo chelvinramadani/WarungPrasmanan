@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include '../config/db.php';
 include '../includes/navbar.php';
 ?>
@@ -57,7 +57,6 @@ include '../includes/navbar.php';
                             <td>Rp " . number_format($row['total_harga'], 0, ',', '.') . "</td>
                             <td class='text-center'>
                                 <a href='detail.php?id={$row['id']}' class='btn btn-sm btn-info'>Detail</a>
-                                <a href='hapus.php?id={$row['id']}' class='btn btn-sm btn-danger' onclick='return confirm(\"Yakin ingin menghapus pesanan?\")'>Hapus</a>
                             </td>
                         </tr>";
                         $no++;

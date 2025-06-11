@@ -5,31 +5,33 @@ include 'config/db.php';
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $username = trim($_POST['username']);
-  $password = trim($_POST['password']);
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
-  $stmt = $koneksi->prepare("SELECT * FROM users WHERE username = ?");
-  $stmt->bind_param("s", $username);
-  $stmt->execute();
-  $result = $stmt->get_result();
+    $stmt = $koneksi->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-  if ($result->num_rows === 1) {
-    $user = $result->fetch_assoc();
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
 
-    if (password_verify($password, $user['password'])) {
-      $_SESSION['user_id'] = $user['id'];
-      $_SESSION['username'] = $user['username'];
-      $_SESSION['nama_lengkap'] = $user['nama_lengkap'];
-      $_SESSION['role'] = $user['role'];
+        if (password_verify($password, $user['password'])) {
+            // Menyimpan data user ke session
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['nama_lengkap'] = $user['nama_lengkap'];
+            $_SESSION['role'] = $user['role'];
 
-      header("Location: index.php");
-      exit;
+            // Redirect ke halaman dashboard utama
+            header("Location: dashboard.php");
+            exit;
+        } else {
+            $error = "Password salah!";
+        }
     } else {
-      $error = "Password salah!";
+        $error = "Username tidak ditemukan!";
     }
-  } else {
-    $error = "Username tidak ditemukan!";
-  }
 }
 ?>
 
@@ -78,7 +80,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" required>
+                <input type="password" name="password" id="password" class="form-control" required>
+                <div class="form-check mt-2">
+                  <input class="form-check-input" type="checkbox" id="showPassword">
+                  <label class="form-check-label" for="showPassword">Tampilkan Password</label>
+                </div>
               </div>
               <div class="d-grid">
                 <button type="submit" class="btn btn-warning">Login</button>
@@ -91,5 +97,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
   </div>
 </body>
+
+<script>
+  document.getElementById('showPassword').addEventListener('change', function() {
+    let passwordField = document.getElementById('password');
+    passwordField.type = this.checked ? 'text' : 'password';
+  });
+</script>
 
 </html>
